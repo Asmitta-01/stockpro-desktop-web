@@ -32,6 +32,7 @@
 .gradient-text {
     -webkit-text-fill-color: transparent;
     background: linear-gradient(90deg, #0cee57, #ce04fc);
+    background-clip: text;
     -webkit-background-clip: text
 }
 
@@ -122,6 +123,7 @@
     content: "";
     inset: 0;
     margin: -2px;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
@@ -147,6 +149,7 @@
     content: "";
     inset: 0;
     margin: -1px;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -2635,10 +2638,10 @@ canvas {
     --bs-tertiary-bg-rgb: 241, 245, 249;
     --bs-heading-color: var(--bs-gray-800);
     --bs-link-color: #0022C0;
-    --bs-link-color-rgb: 139, 61, 255;
+    --bs-link-color-rgb: 0, 34, 192;
     --bs-link-decoration: none;
     --bs-link-hover-color: #2669e6;
-    --bs-link-hover-color-rgb: 111, 49, 204;
+    --bs-link-hover-color-rgb: 38, 105, 230;
     --bs-code-color: #d63384;
     --bs-highlight-color: #64748b;
     --bs-highlight-bg: #fff3cd;
@@ -2659,7 +2662,7 @@ canvas {
     --bs-box-shadow-inset: inset 0 1px 2px rgba(2, 6, 23, .075);
     --bs-focus-ring-width: 0.25rem;
     --bs-focus-ring-opacity: 0.25;
-    --bs-focus-ring-color: rgba(139, 61, 255, .25);
+    --bs-focus-ring-color: rgba(0, 34, 192, .25);
     --bs-form-valid-color: #008008;
     --bs-form-valid-border-color: #008008;
     --bs-form-invalid-color: #db1436;
@@ -3052,6 +3055,7 @@ select:disabled {
 [type=reset],
 [type=submit],
 button {
+    appearance: button;
     -webkit-appearance: button
 }
 
@@ -3112,6 +3116,7 @@ legend+* {
 }
 
 [type=search] {
+    appearance: textfield;
     -webkit-appearance: textfield;
     outline-offset: -2px
 }
@@ -3130,6 +3135,7 @@ legend+* {
 }
 
 ::file-selector-button {
+    appearance: button;
     -webkit-appearance: button;
     font: inherit
 }
@@ -5283,7 +5289,7 @@ progress {
 .form-control:focus {
     background-color: var(--bs-body-bg);
     border-color: #c59eff;
-    box-shadow: 0 0 0 .25rem rgba(139, 61, 255, .25);
+    box-shadow: 0 0 0 .25rem rgba(0, 34, 192, .25);
     color: var(--bs-body-color);
     outline: 0
 }
@@ -5456,7 +5462,7 @@ textarea.form-control-lg {
 
 .form-select:focus {
     border-color: #c59eff;
-    box-shadow: 0 0 0 .25rem rgba(139, 61, 255, .25);
+    box-shadow: 0 0 0 .25rem rgba(0, 34, 192, .25);
     outline: 0
 }
 
@@ -5553,7 +5559,7 @@ textarea.form-control-lg {
 
 .form-check-input:focus {
     border-color: #c59eff;
-    box-shadow: 0 0 0 .25rem rgba(139, 61, 255, .25);
+    box-shadow: 0 0 0 .25rem rgba(0, 34, 192, .25);
     outline: 0
 }
 
@@ -5664,11 +5670,11 @@ textarea.form-control-lg {
 }
 
 .form-range:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 .25rem rgba(139, 61, 255, .25)
+    box-shadow: 0 0 0 1px #fff, 0 0 0 .25rem rgba(0, 34, 192, .25)
 }
 
 .form-range:focus::-moz-range-thumb {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 .25rem rgba(139, 61, 255, .25)
+    box-shadow: 0 0 0 1px #fff, 0 0 0 .25rem rgba(0, 34, 192, .25)
 }
 
 .form-range::-moz-focus-outer {
@@ -6445,7 +6451,7 @@ fieldset:disabled .btn {
     --bs-btn-hover-color: #fff;
     --bs-btn-hover-bg: #0022C0;
     --bs-btn-hover-border-color: #0022C0;
-    --bs-btn-focus-shadow-rgb: 139, 61, 255;
+    --bs-btn-focus-shadow-rgb: 0, 34, 192;
     --bs-btn-active-color: #fff;
     --bs-btn-active-bg: #0022C0;
     --bs-btn-active-border-color: #0022C0;
@@ -7172,7 +7178,7 @@ fieldset:disabled .btn {
 }
 
 .nav-link:focus-visible {
-    box-shadow: 0 0 0 .25rem rgba(139, 61, 255, .25);
+    box-shadow: 0 0 0 .25rem rgba(0, 34, 192, .25);
     outline: 0
 }
 
@@ -8005,7 +8011,7 @@ fieldset:disabled .btn {
     --bs-accordion-btn-icon-transform: rotate(-180deg);
     --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
     --bs-accordion-btn-active-icon: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23381866' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(139, 61, 255, .25);
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(0, 34, 192, .25);
     --bs-accordion-body-padding-x: 1.25rem;
     --bs-accordion-body-padding-y: 1rem;
     --bs-accordion-active-color: var(--bs-primary-text-emphasis);
@@ -8189,7 +8195,7 @@ fieldset:disabled .btn {
     --bs-pagination-hover-border-color: var(--bs-border-color);
     --bs-pagination-focus-color: var(--bs-link-hover-color);
     --bs-pagination-focus-bg: var(--bs-secondary-bg);
-    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(139, 61, 255, .25);
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(0, 34, 192, .25);
     --bs-pagination-active-color: #fff;
     --bs-pagination-active-bg: #0022C0;
     --bs-pagination-active-border-color: #0022C0;
@@ -8875,7 +8881,7 @@ fieldset:disabled .btn {
     --bs-btn-close-bg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23020617' viewBox='0 0 16 16'%3E%3Cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3E%3C/svg%3E");
     --bs-btn-close-opacity: 0.5;
     --bs-btn-close-hover-opacity: 0.75;
-    --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(139, 61, 255, .25);
+    --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(0, 34, 192, .25);
     --bs-btn-close-focus-opacity: 1;
     --bs-btn-close-disabled-opacity: 0.25;
     background: transparent var(--bs-btn-close-bg) center/1em auto no-repeat;
@@ -10612,8 +10618,8 @@ fieldset:disabled .btn {
 
 .link-primary:focus,
 .link-primary:hover {
-    color: RGBA(111, 49, 204, var(--bs-link-opacity, 1)) !important;
-    text-decoration-color: RGBA(111, 49, 204, var(--bs-link-underline-opacity, 1)) !important
+    color: RGBA(38, 105, 230, var(--bs-link-opacity, 1)) !important;
+    text-decoration-color: RGBA(38, 105, 230, var(--bs-link-underline-opacity, 1)) !important
 }
 
 .link-secondary {
@@ -23380,6 +23386,7 @@ strong {
 }
 
 .lift {
+    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     border-radius: .75rem;
@@ -26299,6 +26306,7 @@ a.plyr__control:before {
 }
 
 .plyr__progress__buffer {
+    appearance: none;
     -webkit-appearance: none;
     background: transparent;
     border: 0;
