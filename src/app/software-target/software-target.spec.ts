@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SoftwareFeatures } from './software-features';
+import { SoftwareTarget } from './software-target';
 
-describe('SoftwareFeatures', () => {
-  let component: SoftwareFeatures;
-  let fixture: ComponentFixture<SoftwareFeatures>;
+describe('SoftwareTarget', () => {
+  let component: SoftwareTarget;
+  let fixture: ComponentFixture<SoftwareTarget>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SoftwareFeatures]
+      imports: [SoftwareTarget]
     })
-    .compileComponents();
+      .compileComponents();
 
-    fixture = TestBed.createComponent(SoftwareFeatures);
+    fixture = TestBed.createComponent(SoftwareTarget);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
