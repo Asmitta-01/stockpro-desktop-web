@@ -1,0 +1,15 @@
+i.bi {
+    width: 20px;
+    height: 20px;
+}
+
+i.bi.size-32 {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+img.foreground-pic {
+    height: 200px;
+    box-shadow: 0 0 15px 0px #5a5a5a;
+    border-radius: 8px;
+}

@@ -11,6 +11,6 @@ export class SoftwareStart implements OnInit {
 
 
   ngOnInit(): void {
-    this.imageUrl = 'https://block.codescandy.com/assets/images/landings/account/account-hero-img.jpg';
+    this.imageUrl = 'images/hero.png';
   }
 }
