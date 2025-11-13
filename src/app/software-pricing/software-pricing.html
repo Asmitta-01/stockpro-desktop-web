@@ -1,0 +1,101 @@
+<section class="py-lg-9 py-6 bg-gray-200" id="pricing">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-12">
+                <div class="text-center mb-5 mb-lg-8">
+                    <small
+                        class="border rounded-pill border-dark text-dark text-uppercase px-3 py-2 fw-semibold">Tarifs</small>
+                    <h2 class="mt-4">Trouvez le Plan Adapté à Votre Croissance</h2>
+                    <p class="mb-0 px-xl-9">
+                        Simplifiez votre gestion de stock et optimisez vos opérations sans surprise. Nos plans sont
+                        conçus pour s'adapter à l'échelle et aux besoins spécifiques de votre entreprise, que vous soyez
+                        <span class="text-primary">une PME en pleine expansion ou une grande structure
+                            logistique</span>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!--pricing-->
+        <div class="table-responsive-xl">
+            <div class="row flex-nowrap pb-4 me-5 me-lg-0">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+                    <!--card-->
+                    <div class="card bg-dark border-0">
+                        <div class="card-body text-white">
+                            <span class="badge text-bg-warning text-uppercase mb-6 d-block py-2">Gratuit</span>
+
+                            <h1 class="text-white mb-4 h2">30 Jours d'essai
+                            </h1>
+                            <div class="mb-6">
+                                <h2 class="h3 text-white">Gratuit</h2>
+                                <p>Pour découvrir toutes les fonctionnalités de StockPro sans engagement.</p>
+                                <p class="mb-0 small">* Aucune carte requise.</p>
+                            </div>
+
+                            <ul class="list-unstyled mb-0">
+                                @for (benefit of freePlanBenefits; track $index) {
+                                <li class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                        class="bi bi-check-circle-fill text-body" viewBox="0 0 16 16">
+                                        <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg>
+                                    <span class="ms-3">{{ benefit }}</span>
+                                </li>
+                                }
+                            </ul>
+                            <div class="d-grid mt-6">
+                                <a href="#" class="btn btn-primary">
+                                    Commencer maintenant
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--card-->
+                </div>
+                @for (plan of plans; track plan.id) {
+                <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+                    <!--card-->
+                    <div class="card pricing h-100">
+                        <div class="card-body">
+                            <h2 class="mb-4 d-flex align-items-center">
+                                <div class="price-text">
+                                    <div class="price price-show">
+                                        <span>{{ plan.price| currency : getCurrentCurrency() }}</span>
+                                        <span class="price-duration fs-6 text-body mt-auto mb-2">/toujours</span>
+                                    </div>
+                                </div>
+                            </h2>
+                            <div class="mb-6">
+                                <h3>{{plan.name}}</h3>
+                                <p class="mb-0">{{ plan.description }}</p>
+                            </div>
+
+                            <ul class="list-unstyled mb-0">
+                                @for (benefit of plan.benefits; track $index) {
+                                <li class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                                        class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
+                                        <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg>
+                                    <span class="ms-3">{{ benefit }}</span>
+                                </li>
+                                }
+                            </ul>
+                            <div class="d-grid mt-6">
+                                <a href="#" class="btn btn-primary">
+                                    {{ plan.price| currency : getCurrentCurrency() }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--card-->
+                </div>
+                }
+            </div>
+        </div>
+        <!--pricing-->
+    </div>
+</section>
