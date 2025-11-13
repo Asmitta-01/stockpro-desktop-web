@@ -1,0 +1,172 @@
+<app-navbar></app-navbar>
+<main class="main">
+    <app-subpage-header></app-subpage-header>
+
+    <section class="mb-xl-9">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-6">
+                        <h1 class="mb-0">Fonctionnalités principales</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-7 col-md-12">
+                    <figure>
+                        <img src="images/banner-1024x500.webp" class="img-fluid object-fit-cover rounded-3 shadow-sm"
+                            alt="Banner">
+                    </figure>
+                </div>
+                <div class="col-lg-4 offset-lg-1 col-md-12">
+                    <h2 class="mb-4">Pourquoi choisir StockPro ?</h2>
+                    <div class="d-flex pt-lg-0 py-3">
+                        <div
+                            class="icon-md icon-shape rounded-circle bg-body-tertiary bg-opacity-50 border mb-3 flex-shrink-0">
+                            <i class="bi bi-lock-fill"></i>
+                        </div>
+
+                        <div class="ms-3">
+                            <h5>Utilisable sans internet</h5>
+                            <p class="mb-0">Pas besoin d'un accès au réseau</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex border-1 border-top-dashed border-secondary border-opacity-25 py-3">
+                        <div
+                            class="icon-md icon-shape rounded-circle bg-body-tertiary bg-opacity-50 border mb-3 flex-shrink-0">
+                            <i class="bi bi-lightning-fill"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5>Rapide et léger</h5>
+                            <p class="mb-0">Logiciel léger installable rapidement</p>
+                        </div>
+                    </div>
+                    <div class="d-flex border-1 border-top-dashed border-secondary border-opacity-25 py-3">
+                        <div
+                            class="icon-md icon-shape rounded-circle bg-body-tertiary bg-opacity-50 border mb-3 flex-shrink-0">
+                            <i class="bi bi-windows"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5>Compatible avec tous les PC Windows</h5>
+                            <p class="mb-0">Prends en charge Windows 7, 8, 10 && 11</p>
+                        </div>
+                    </div>
+                    <div class="d-flex border-1 border-top-dashed border-secondary border-opacity-25 py-3">
+                        <div
+                            class="icon-md icon-shape rounded-circle bg-body-tertiary bg-opacity-50 border mb-3 flex-shrink-0">
+                            <i class="bi bi-universal-access"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5>Facile à prendre en main</h5>
+                            <p class="mb-0">Experience utilisateur fluide</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-7 col-md-12 order-2">
+                    <div class="mb-6 mt-4">
+                        <h2 class="mb-4">A Propos</h2>
+                        <p class="mb-3">
+                            StockPro Desktop est un logiciel de gestion de stock moderne, rapide et complet, conçu pour
+                            simplifier la vie des commerçants, détaillants, grossistes et entreprises de toutes tailles.
+                            Pensé pour une utilisation hors ligne, il offre une expérience fluide et intuitive, sans
+                            dépendre d’une connexion internet.
+                        </p>
+                        <p class="mb-0">
+                            Grâce à son interface claire et ses outils puissants, StockPro vous permet de maîtriser vos
+                            stocks, vos ventes, vos fournisseurs et vos clients, tout en gagnant du temps au quotidien.
+                            Disponible en deux packs — Standard et Pro —, il s’adapte aussi bien aux petits commerces
+                            qu’aux structures plus grandes nécessitant plusieurs utilisateurs ou boutiques.
+                        </p>
+                    </div>
+
+                    <h3 class="mb-4">Détails des fonctionnalités</h3>
+                    <ul class="list-group list-group-flush mb-0">
+                        @for (item of details; track $index) {
+                        <li class="list-group-item pb-4 px-0">
+                            <h5>
+                                {{ item.feature }}
+                            </h5>
+                            <p class="mb-0">
+                                {{ item.details }}
+                            </p>
+                        </li>
+                        }
+
+                        <li class="list-group-item pb-4 px-0">
+                            <h5>Collaboration en réseau (LAN)</h5>
+                            <p>
+                                StockPro permet une utilisation collaborative sur un réseau local sans connexion
+                                internet.
+                                Trois modes sont disponibles selon votre organisation :
+                            </p>
+                            <ul>
+                                <li><span class="fw-bold">Offline</span> : travail autonome sur un seul poste.</li>
+                                <li><span class="fw-bold">Host</span> : un PC devient le serveur central.</li>
+                                <li><span class="fw-bold">Client</span> : d’autres appareils se connectent
+                                    automatiquement à ce serveur.</li>
+                            </ul>
+                            <p class="mb-0 mt-3">
+                                Grâce à la découverte automatique, les postes disponibles sur le réseau sont détectés
+                                sans configuration manuelle.
+                            </p>
+                        </li>
+
+                        <li class="list-group-item border-bottom pb-4 px-0">
+                            <h5>Rapports et analyses</h5>
+                            <ul>
+                                <li>Rapports de stock: Analysez vos stocks avec précision : quantités, valeurs,
+                                    mouvements et alertes sur les produits critiques.</li>
+                                <li>Rapports d’opérations: Suivez vos ventes et achats avec des graphiques de tendance
+                                    clairs et filtrage par période</li>
+                                <li>Rapports d’inventaire: Mesurez la cohérence de votre stock, détectez les écarts
+                                    entre stock réel et stock théorique et anticipez les ruptures.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block offset-lg-1 col-md-12 order-lg-2">
+                    <div class="card shadow-sm position-sticky" style="top: 7rem">
+                        <div class="card-body">
+                            <div class="mb-6 text-center">
+                                <h3 class="mb-0">Prêt à faire un pas dans votre gestion ?</h3>
+                            </div>
+                            <form class="row g-3 needs-validation" novalidate="">
+                                <div class="col-md-12">
+                                    <label for="eventSingleNameInput" class="form-label">
+                                        First Name
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="eventSingleNameInput" required="">
+                                    <div class="invalid-feedback">Please enter first name.</div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="eventSingleLastNameInput" class="form-label">
+                                        Last Name
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="eventSingleLastNameInput" required="">
+                                    <div class="invalid-feedback">Please enter last name.</div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="eventSingleEmailInput" class="form-label">
+                                        Email
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" class="form-control" id="eventSingleEmailInput" required="">
+                                    <div class="invalid-feedback">Please enter email.</div>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary" type="submit">Télécharger</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
