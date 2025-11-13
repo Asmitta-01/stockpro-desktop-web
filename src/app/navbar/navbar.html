@@ -13,18 +13,17 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto align-items-lg-center">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#home" role="button" data-bs-toggle="dropdown">Accueil</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">Fonctionnalités</a>
+                        <a class="nav-link" href="#features">Fonctionnalités</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">Tarifs</a>
+                        <a class="nav-link" href="#pricing">Tarifs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Accounts</a>
+                        <a class="nav-link" href="#">Accounts</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -56,8 +55,25 @@
                     </li>
                 </ul>
                 <div class="mt-3 mt-lg-0 d-flex align-items-center">
-                    <a href="https://block.codescandy.com/signin.html" class="btn btn-light mx-2">Login</a>
-                    <a href="{{ downloadLink }}" class="btn btn-primary">Download</a>
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle mx-2" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ getCurrentCurrency() }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            @for (item of getCurrencies(); track $index) {
+                            <li>
+                                @if (getCurrentCurrency() == item) {
+                                <button class="dropdown-item active">{{ item }}</button>
+                                }
+                                @else {
+                                <button class="dropdown-item" (click)="setCurrency(item)">{{ item }}</button>
+                                }
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                    <a href="{{ downloadLink }}" class="btn btn-primary">Télécharger</a>
                 </div>
             </div>
         </nav>
