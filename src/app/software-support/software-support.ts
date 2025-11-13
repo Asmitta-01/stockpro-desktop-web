@@ -10,7 +10,7 @@ export class SoftwareSupport implements OnInit {
   imageUrl!: string;
 
   ngOnInit(): void {
-    this.imageUrl = 'https://block.codescandy.com/assets/images/landings/account/account-support.jpg';
+    this.imageUrl = 'images/black-woman.webp';
   }
 
 }

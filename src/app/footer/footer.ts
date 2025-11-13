@@ -11,7 +11,7 @@ export class Footer implements OnInit {
   logo!: string;
 
   ngOnInit(): void {
-    this.logo = 'https://block.codescandy.com/assets/images/logo/logo.svg';
+    this.logo = 'logo-147x32.png';
   }
 
 }
