@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Navbar } from "../navbar/navbar";
-import { SubpageHeader } from "../subpage-header/subpage-header";
-import { FeatureDetails } from '../models/feature-details.model';
+import { Navbar } from "../../components/navbar/navbar";
+import { SubpageHeader } from "../../components/subpage-header/subpage-header";
+import { FeatureDetails } from '../../models/feature-details.model';
 
 @Component({
   selector: 'app-features-page',

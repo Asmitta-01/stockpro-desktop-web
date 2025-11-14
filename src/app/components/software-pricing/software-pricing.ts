@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CurrencyService } from '../service/currency-service';
-import { Plan } from '../models/plan.model';
+import { CurrencyService } from '../../service/currency-service';
+import { Plan } from '../../models/plan.model';
 
 @Component({
   selector: 'app-software-pricing',

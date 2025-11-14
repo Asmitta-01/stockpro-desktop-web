@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Navbar } from "../navbar/navbar";
-import { SubpageHeader } from "../subpage-header/subpage-header";
-import { SectorManager } from '../models/sector-manager.model';
-import { BusinessSector } from '../models/sector.interface';
+import { Navbar } from "../../components/navbar/navbar";
+import { SubpageHeader } from "../../components/subpage-header/subpage-header";
+import { SectorManager } from '../../models/sector-manager.model';
+import { BusinessSector } from '../../models/sector.interface';
 
 @Component({
   selector: 'app-reasons-page',
