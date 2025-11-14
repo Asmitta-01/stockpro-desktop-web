@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+<main class="main">
+    <app-subpage-header></app-subpage-header>
+
+    <section class="mb-xl-9">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-6">
+                        <h1>Pourquoi choisir StockPro ?</h1>
+                        <p class="mb-0">
+                            StockPro est une solution de gestion de stock moderne, conçue pour simplifier le quotidien
+                            des commerçants, détaillants et gestionnaires d’entreprise.
+                            Quel que soit votre secteur d’activité, StockPro vous aide à gagner du temps, éviter les
+                            ruptures de stock et mieux suivre vos ventes et achats, tout en vous offrant une vue claire
+                            sur la rentabilité de votre commerce.
+                            <br>
+                            Grâce à son interface intuitive, son mode réseau sans Internet et ses rapports détaillés,
+                            StockPro s’adapte parfaitement à tous les types de points de vente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-7">
+                @for (sector of getSectors(); track sector.id) {
+                <div class="col-sm-6 col-md-6" [id]="sector.id">
+                    <div>
+                        <div class="position-relative mb-7">
+                            <img [src]="sector.image" alt="wide" class="rounded-3 img-fluid">
+                            <div class="position-absolute top-md-100 start-md-0 top-100 start-50 translate-middle">
+                                <div
+                                    class="p-3 icon-xl icon-shape rounded bg-primary border border-2 border-white ms-md-10">
+                                    <i class="bi bi-{{ sector.icon }} text-white-stable"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-lg-4">
+                        <h2 class="mb-3 h3">{{ sector.label }}</h2>
+
+                        <p>
+                            {{ sector.description }}
+                        </p>
+
+                        <div class="mb-5">
+                            <ul class="list-unstyled mb-5">
+                                @for (item of sector.benefits; track $index) {
+                                <li class="d-flex mb-2">
+                                    <i class="bi bi-check-circle-fill text-primary mt-1"></i>
+                                    <span class="ms-2">{{ item }}</span>
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="py-lg-8 py-5 bg-gray-900">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 col-md-7">
+                            <div class="text-center text-md-start mb-6 mb-md-0">
+                                <h2 class="text-white-stable">Vous ne trouvez pas le plus pour votre business ?</h2>
+                                <p class="mb-0 text-dark-50">Discutons calmement, StockPro peut vous aider de bien des
+                                    manières..</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-5">
+                            <div class="text-center">
+                                <a href="#" class="btn btn-primary">Envoyer un mail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
