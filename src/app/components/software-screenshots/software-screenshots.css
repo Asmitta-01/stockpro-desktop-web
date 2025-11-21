@@ -1,0 +1,7 @@
+.screenshot {
+    border-radius: .5rem;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}

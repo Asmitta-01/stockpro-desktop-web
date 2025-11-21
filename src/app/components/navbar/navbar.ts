@@ -1,20 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CurrencyService } from '../../service/currency-service';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class Navbar implements OnInit {
-  downloadLink!: string;
-
+export class Navbar {
   constructor(private currencyService: CurrencyService) { }
-
-  ngOnInit(): void {
-    this.downloadLink = 'https://stockpro-desktop.fr.uptodown.com/windows';
-  }
 
   getCurrentCurrency(): string {
     return this.currencyService.getCurrency();
