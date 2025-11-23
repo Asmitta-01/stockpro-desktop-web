@@ -85,7 +85,8 @@
                                 }
                             </ul>
                             <div class="d-grid mt-6">
-                                <a href="#" class="btn btn-primary">
+                                <a routerLink="download" [queryParams]="{ 'license' : plan.name | lowercase}"
+                                    class="btn btn-primary">
                                     {{ plan.price| currency : getCurrentCurrency() }}
                                 </a>
                             </div>

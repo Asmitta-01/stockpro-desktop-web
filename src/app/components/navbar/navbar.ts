@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CurrencyService } from '../../service/currency-service';
+import { CurrencyService } from '../../services/currency-service';
 import { RouterLink } from "@angular/router";
 
 @Component({

@@ -2,6 +2,7 @@
 <main class="main">
     <app-subpage-header></app-subpage-header>
 
+    @if (!showLicensePurchase) {
     <section class="mb-xl-8">
         <div class="container">
             <div class="row">
@@ -49,14 +50,16 @@
                     <div class="mb-5">
                         <h2 class="h3 mb-3">Installation</h2>
                         <ol class="ps-3">
-                            <li class="mb-2">Téléchargez le fichier d’installation en cliquant sur “Télécharger”.</li>
-                            <li class="mb-2">Double-cliquez sur le fichier téléchargé pour lancer l’installateur.</li>
-                            <li class="mb-2">Suivez les invites de l’assistant d’installation.</li>
+                            <li class="mb-2">Téléchargez le fichier d'installation en cliquant sur "Télécharger".</li>
+                            <li class="mb-2">Double-cliquez sur le fichier téléchargé pour lancer l'installateur.</li>
+                            <li class="mb-2">Suivez les invites de l'assistant d'installation.</li>
                             <li class="mb-2">Ouvrez StockPro depuis le raccourci créé sur le bureau.</li>
                         </ol>
 
-                        <p class="small mb-0 mt-2">Aucune connexion Internet n’est requise après l’installation.
-                            Pour le mode LAN, connectez vos postes sur le même réseau local.</p>
+                        <p class="small mb-0 mt-2">
+                            Aucune connexion Internet n'est requise après l'installation.
+                            Pour le mode LAN, connectez vos postes sur le même réseau local.
+                        </p>
                     </div>
 
                 </div>
@@ -91,4 +94,112 @@
     </section>
 
     <app-software-screenshots></app-software-screenshots>
+    } @else {
+    <!-- License Purchase Flow -->
+    <section class="mb-xl-8">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="mb-4">Achetez StockPro Desktop</h1>
+                </div>
+            </div>
+
+            <!-- User Info Form -->
+            @if (currentStep === 'form') {
+            <div class="row">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body p-5">
+                            <h3 class="mb-4">Informations de commande</h3>
+                            <form (ngSubmit)="onSubmitForm()" #userForm="ngForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Prénom *</label>
+                                        <input type="text" class="form-control" [(ngModel)]="userInfo.firstName"
+                                            name="firstName" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Nom *</label>
+                                        <input type="text" class="form-control" [(ngModel)]="userInfo.lastName"
+                                            name="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" class="form-control" [(ngModel)]="userInfo.email" name="email"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Entreprise</label>
+                                    <input type="text" class="form-control" [(ngModel)]="userInfo.company"
+                                        name="company">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Téléphone</label>
+                                    <input type="tel" class="form-control" [(ngModel)]="userInfo.phone" name="phone">
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div>
+                                        <h5 class="mb-0">Prix: 25,000 FCFA</h5>
+                                        <small class="text-muted">Licence à vie</small>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="!userForm.valid">
+                                    Procéder au paiement
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            } @else if(currentStep === 'success') {
+            <!-- Success Page -->
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="text-center mb-5">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                        <h2 class="mt-3">Paiement réussi !</h2>
+                        <p class="lead">Votre licence StockPro Desktop a été générée avec succès.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body p-5">
+                            <h4 class="mb-4">Votre clé de licence</h4>
+                            <div class="bg-light p-3 rounded mb-4">
+                                <code class="fs-5">{{ licenseKey }}</code>
+                                <button class="btn btn-outline-secondary btn-sm ms-3" (click)="downloadLicenseKey()">
+                                    <i class="bi bi-download me-1"></i>Télécharger
+                                </button>
+                            </div>
+
+                            <h5 class="mb-3">Instructions d'activation</h5>
+                            <ol class="mb-4">
+                                <li class="mb-2">Téléchargez et installez StockPro Desktop</li>
+                                <li class="mb-2">Ouvrez le logiciel</li>
+                                <li class="mb-2">Allez dans <strong>Aide → Activer la licence</strong></li>
+                                <li class="mb-2">Saisissez votre clé de licence ci-dessus</li>
+                                <li class="mb-2">Cliquez sur <strong>Activer</strong></li>
+                            </ol>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-success w-100">
+                                        <i class="bi bi-download me-2"></i>Télécharger StockPro
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-outline-primary w-100" (click)="downloadLicenseKey()">
+                                        <i class="bi bi-file-text me-2"></i>Télécharger la licence
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </section>
+    }
+
 </main>

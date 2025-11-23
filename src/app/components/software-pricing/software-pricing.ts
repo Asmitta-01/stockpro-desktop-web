@@ -1,11 +1,12 @@
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, LowerCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CurrencyService } from '../../service/currency-service';
+import { CurrencyService } from '../../services/currency-service';
 import { Plan } from '../../models/plan.model';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-software-pricing',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, LowerCasePipe, RouterLink],
   templateUrl: './software-pricing.html',
   styleUrl: './software-pricing.css',
 })
