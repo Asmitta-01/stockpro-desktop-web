@@ -7,6 +7,8 @@ import { SubpageHeader } from "../../components/subpage-header/subpage-header";
 import { SoftwareScreenshots } from "../../components/software-screenshots/software-screenshots";
 import { SupabaseService } from '../../services/supabase-service';
 import { UserInfo, PaymentData } from '../../models/user-info.interface';
+import { PlanService } from '../../services/plan.service';
+import { PricingPlan } from '../../models/pricing-plan.model';
 
 @Component({
   selector: 'app-download-page',
@@ -26,15 +28,21 @@ export class DownloadPage implements OnInit {
   };
   licenseKey = '';
   paymentId = '';
+  selectedPlan?: PricingPlan;
 
   constructor(
     private route: ActivatedRoute,
-    private supabaseService: SupabaseService
+    private supabaseService: SupabaseService,
+    private planService: PlanService
   ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.showLicensePurchase = params['license'] === 'standard';
+      const licenseParam = params['license'];
+      if (licenseParam) {
+        this.showLicensePurchase = true;
+        this.selectedPlan = this.planService.getPlanByName(licenseParam) || this.planService.getFreePlan();
+      }
       if (params['payment']) {
         this.paymentId = params['payment'];
         this.onPaymentSuccess();
@@ -49,11 +57,12 @@ export class DownloadPage implements OnInit {
     }
 
     this.paymentId = this.generateId();
+    const amount = this.selectedPlan?.price ?? 25000;
     const paymentData: PaymentData = {
       id: this.paymentId,
       userId: this.generateId(),
       userInfo: this.userInfo,
-      amount: 25000,
+      amount: amount,
       status: 'pending',
       createdAt: new Date()
     };
@@ -70,8 +79,8 @@ export class DownloadPage implements OnInit {
   redirectToNotchPay() {
     const notchPayUrl = `https://api.notchpay.co/payments/initialize`;
     const paymentData = {
-      amount: 25000,
-      currency: 'XAF',
+      amount: this.selectedPlan?.price ?? 25000,
+      currency: this.selectedPlan?.currency ?? 'XAF',
       email: this.userInfo.email,
       reference: this.paymentId,
       callback: `${window.location.origin}/download?payment=${this.paymentId}`

@@ -27,7 +27,8 @@
                         <h2 class="h3 mb-3">Choisissez le lien de téléchargement</h2>
                         <div class="row g-3">
                             <div class="col-md-6 text-center">
-                                <a href="#" class="btn btn-primary w-100">
+                                <a href="https://github.com/Asmitta-01/stockpro-desktop/releases/download/1.6.1.10/StockPro-Setup.exe"
+                                    download="StockPro Setup" class="btn btn-primary w-100">
                                     <i class="bi bi-windows me-2"></i>Télécharger
                                 </a>
                                 <span class="small mt-3">
@@ -107,47 +108,77 @@
             <!-- User Info Form -->
             @if (currentStep === 'form') {
             <div class="row">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <div class="card">
-                        <div class="card-body p-5">
-                            <h3 class="mb-4">Informations de commande</h3>
-                            <form (ngSubmit)="onSubmitForm()" #userForm="ngForm">
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Prénom *</label>
-                                        <input type="text" class="form-control" [(ngModel)]="userInfo.firstName"
-                                            name="firstName" required>
+                <div class="col-lg-9 col-md-10 mx-auto">
+                    <div class="row g-4">
+                        <div class="col-md-7">
+                            <div class="card">
+                                <div class="card-body p-5">
+                                    <h3 class="mb-4">Informations de commande</h3>
+                                    <form (ngSubmit)="onSubmitForm()" #userForm="ngForm">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Prénom *</label>
+                                                <input type="text" class="form-control" [(ngModel)]="userInfo.firstName"
+                                                    name="firstName" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Nom *</label>
+                                                <input type="text" class="form-control" [(ngModel)]="userInfo.lastName"
+                                                    name="lastName" required>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email *</label>
+                                            <input type="email" class="form-control" [(ngModel)]="userInfo.email"
+                                                name="email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Entreprise</label>
+                                            <input type="text" class="form-control" [(ngModel)]="userInfo.company"
+                                                name="company">
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Téléphone</label>
+                                            <input type="tel" class="form-control" [(ngModel)]="userInfo.phone"
+                                                name="phone">
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <div>
+                                                <h5 class="mb-0">Prix: {{ selectedPlan?.price | currency :
+                                                    (selectedPlan?.currency || 'XAF') }}</h5>
+                                                <small class="text-muted">{{ selectedPlan?.name }} - Licence à
+                                                    vie</small>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-lg w-100"
+                                            [disabled]="!userForm.valid">
+                                            Procéder au paiement
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="card h-100">
+                                <div class="card-body p-4 d-flex flex-column">
+                                    <h5 class="mb-3">{{ selectedPlan?.name || 'Plan' }}</h5>
+                                    <h3 class="mb-3">{{ selectedPlan?.price | currency : (selectedPlan?.currency ||
+                                        'XAF') }}</h3>
+                                    <p class="text-muted mb-3">{{ selectedPlan?.description }}</p>
+                                    <ul class="list-unstyled mb-0">
+                                        @for (benefit of selectedPlan?.benefits || []; track $index) {
+                                        <li class="mb-2">
+                                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                            {{ benefit }}
+                                        </li>
+                                        }
+                                    </ul>
+                                    <div class="mt-auto pt-3">
+                                        <a href="/download" class="btn btn-outline-secondary w-100">Retour</a>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Nom *</label>
-                                        <input type="text" class="form-control" [(ngModel)]="userInfo.lastName"
-                                            name="lastName" required>
-                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Email *</label>
-                                    <input type="email" class="form-control" [(ngModel)]="userInfo.email" name="email"
-                                        required>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Entreprise</label>
-                                    <input type="text" class="form-control" [(ngModel)]="userInfo.company"
-                                        name="company">
-                                </div>
-                                <div class="mb-4">
-                                    <label class="form-label">Téléphone</label>
-                                    <input type="tel" class="form-control" [(ngModel)]="userInfo.phone" name="phone">
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div>
-                                        <h5 class="mb-0">Prix: 25,000 FCFA</h5>
-                                        <small class="text-muted">Licence à vie</small>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="!userForm.valid">
-                                    Procéder au paiement
-                                </button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

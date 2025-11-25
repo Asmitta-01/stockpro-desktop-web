@@ -1,0 +1,25 @@
+/* Pricing cards tweaks */
+.card.pricing {
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(22, 28, 45, 0.08);
+}
+
+.price-text .price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.price-show span:first-child {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.price-duration {
+    color: #6c757d;
+}
+
+.card.bg-dark .badge.text-bg-warning {
+    background: #ffc107;
+    color: #000;
+}
