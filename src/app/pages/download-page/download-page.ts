@@ -7,7 +7,6 @@ import { SubpageHeader } from "../../components/subpage-header/subpage-header";
 import { SoftwareScreenshots } from "../../components/software-screenshots/software-screenshots";
 import { SupabaseService } from '../../services/supabase-service';
 import { UserInfo, PaymentData } from '../../models/user-info.interface';
-import { log } from 'console';
 
 @Component({
   selector: 'app-download-page',
@@ -63,7 +62,7 @@ export class DownloadPage implements OnInit {
       await this.supabaseService.savePayment(paymentData);
       this.redirectToNotchPay();
     } catch (error) {
-      log(error);
+      console.log(error);
       alert('Erreur lors de l\'enregistrement. Veuillez réessayer.');
     }
   }
