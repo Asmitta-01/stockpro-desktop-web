@@ -17,16 +17,35 @@ export class SupabaseService {
   }
 
   async savePayment(paymentData: PaymentData): Promise<any> {
+    // Map camelCase PaymentData to snake_case DB columns
+    const row: any = {
+      id: paymentData.id,
+      user_id: paymentData.userId || null,
+      user_info: paymentData.userInfo,
+      plan_name: paymentData.planName || null,
+      amount: paymentData.amount,
+      currency: paymentData.currency || 'XAF',
+      status: paymentData.status,
+      provider: paymentData.provider || null,
+      provider_reference: paymentData.providerReference || null,
+      license_key: paymentData.licenseKey || null,
+      metadata: paymentData.metadata || null,
+      receipt_url: paymentData.receiptUrl || null,
+      ip_address: paymentData.ipAddress || null,
+      created_at: paymentData.createdAt || new Date(),
+      updated_at: paymentData.updatedAt || new Date()
+    };
+
     const { data, error } = await this.supabase
       .from('payments')
-      .insert([paymentData]);
+      .insert([row]);
 
     if (error) throw error;
     return data;
   }
 
   async updatePaymentStatus(paymentId: string, status: string, licenseKey?: string): Promise<any> {
-    const updateData: any = { status };
+    const updateData: any = { status, updated_at: new Date() };
     if (licenseKey) updateData.license_key = licenseKey;
 
     const { data, error } = await this.supabase
@@ -46,6 +65,27 @@ export class SupabaseService {
       .single();
 
     if (error) return null;
-    return data;
+
+    // Map DB snake_case to camelCase PaymentData
+    const row: any = data;
+    const result: PaymentData = {
+      id: row.id,
+      userId: row.user_id,
+      userInfo: row.user_info,
+      amount: Number(row.amount),
+      status: row.status,
+      licenseKey: row.license_key || undefined,
+      createdAt: row.created_at ? new Date(row.created_at) : new Date(),
+      planName: row.plan_name || undefined,
+      currency: row.currency || undefined,
+      provider: row.provider || undefined,
+      providerReference: row.provider_reference || undefined,
+      metadata: row.metadata || undefined,
+      receiptUrl: row.receipt_url || undefined,
+      ipAddress: row.ip_address || undefined,
+      updatedAt: row.updated_at ? new Date(row.updated_at) : undefined
+    };
+
+    return result;
   }
 }

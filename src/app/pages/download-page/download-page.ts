@@ -9,6 +9,7 @@ import { SupabaseService } from '../../services/supabase-service';
 import { UserInfo, PaymentData } from '../../models/user-info.interface';
 import { PlanService } from '../../services/plan.service';
 import { PricingPlan } from '../../models/pricing-plan.model';
+import { response } from 'express';
 
 @Component({
   selector: 'app-download-page',
@@ -60,11 +61,15 @@ export class DownloadPage implements OnInit {
     const amount = this.selectedPlan?.price ?? 25000;
     const paymentData: PaymentData = {
       id: this.paymentId,
-      userId: this.generateId(),
+      userId: this.userInfo.email,
       userInfo: this.userInfo,
       amount: amount,
       status: 'pending',
-      createdAt: new Date()
+      ipAddress: await this.fetchIpAddress(),
+      createdAt: new Date(),
+      planName: this.selectedPlan?.name,
+      currency: this.selectedPlan?.currency ?? 'XAF',
+      provider: 'notchpay'
     };
 
     try {
@@ -108,7 +113,7 @@ export class DownloadPage implements OnInit {
   }
 
   private generateId(): string {
-    return Math.random().toString(36).substr(2, 9);
+    return Math.random().toString(36).substring(2, 9);
   }
 
   private generateLicenseKey(): string {
@@ -119,5 +124,22 @@ export class DownloadPage implements OnInit {
       result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return result;
+  }
+
+  /** Function to fetch current user IP address */
+  private async fetchIpAddress(): Promise<string> {
+    try {
+      let response = await fetch('https://api.ipify.org/?format=json');
+      if (response.ok) {
+        let data = await response.json();
+        return data.ip;
+      } else {
+        console.error('Error fetching IP address:', response.statusText);
+        return 'Unknown';
+      }
+    } catch (error) {
+      console.error('Error fetching IP address:', error);
+      return 'Unknown';
+    }
   }
 }
