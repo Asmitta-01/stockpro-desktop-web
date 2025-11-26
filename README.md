@@ -1,4 +1,48 @@
-# StockproDesktopWeb
+# StockPro Desktop Web
+
+Official website for StockPro Desktop - A comprehensive inventory management software for businesses.
+
+## About
+
+This Angular website serves as the marketing and distribution platform for StockPro Desktop, featuring:
+
+- Product information and features showcase
+- Pricing plans and license purchasing
+- Software downloads and installation guides
+- Customer testimonials and support resources
+- Payment integration with NotchPay for license sales
+
+## Screenshots
+
+### Website
+
+![Homepage](screenshots/homepage.jpeg)
+*Homepage showcasing StockPro Desktop features*
+
+![Pricing Plans](screenshots/pricing.png)
+*Flexible pricing plans for different business needs*
+
+![Download Page](screenshots/download.jpeg)
+*Secure download and license purchase flow*
+
+### StockPro Desktop Software
+
+![Dashboard](public/images/screenshots/home.webp)
+*Main dashboard with inventory overview*
+
+![Bulk Add](public/images/screenshots/items-bulk-add.webp)
+*Bulk items add feature*
+
+## Issues & Support
+
+For StockPro Desktop software issues, bug reports, or feature requests, please use the [Issues](../../issues) section of this repository.
+
+## Tech Stack
+
+- Angular 20.3.9
+- Bootstrap 5
+- Supabase (Database)
+- NotchPay (Payment Gateway)
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
 
@@ -35,25 +79,3 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
