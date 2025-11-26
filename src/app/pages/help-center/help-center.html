@@ -1,0 +1,96 @@
+<app-navbar></app-navbar>
+<main class="main">
+    <app-subpage-header></app-subpage-header>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-8 mx-auto text-center">
+                    <h1>Centre d'aide</h1>
+                    <p class="lead">Trouvez des réponses aux questions fréquentes, accédez aux ressources et contactez
+                        notre équipe de support.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Foire aux questions</h4>
+                            <div class="accordion" id="faqAccordion">
+                                @for (faq of faqs; track $index) {
+                                <div class="accordion-item mb-2">
+                                    <h2 class="accordion-header" id="heading{{$index}}">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" attr.data-bs-target="#collapse{{$index}}"
+                                            aria-expanded="false" attr.aria-controls="collapse{{$index}}">
+                                            {{ faq.q }}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{$index}}" class="accordion-collapse collapse"
+                                        attr.aria-labelledby="heading{{$index}}" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            {{ faq.a }}
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h4 class="mb-3">Ressources</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><a href="/download">Téléchargements et installation</a></li>
+                                <li class="mb-2"><a href="/features">Guide des fonctionnalités</a></li>
+                                <li class="mb-2"><a href="https://github.com/Asmitta-01/stockpro-desktop-web/issues"
+                                        target="_blank">Signaler un bug / demander une fonctionnalité</a></li>
+                                <li class="mb-2">Email de support: <a
+                                        href="mailto:support@stockpro-desktop.fr">support@stockpro-desktop.fr</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-3">Contactez le support</h4>
+                            <form (ngSubmit)="onSubmitContact(contactForm)" #contactForm="ngForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Nom</label>
+                                    <input type="text" class="form-control" [(ngModel)]="contact.name" name="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" [(ngModel)]="contact.email" name="email">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Sujet</label>
+                                    <input type="text" class="form-control" [(ngModel)]="contact.subject"
+                                        name="subject">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Message</label>
+                                    <textarea class="form-control" rows="6" [(ngModel)]="contact.message"
+                                        name="message"></textarea>
+                                </div>
+                                <button class="btn btn-primary w-100" type="submit">Envoyer</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5>Horaires support</h5>
+                            <p class="mb-1">Lun - Ven: 8:00 - 18:00</p>
+                            <p class="mb-0">Téléphone: <a href="tel:+237676576604">+237 676 576 604</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
