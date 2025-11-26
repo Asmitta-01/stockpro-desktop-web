@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node -r dotenv/config my-node.js && ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -33,6 +33,7 @@
     "@angular/ssr": "^20.3.9",
     "@supabase/supabase-js": "^2.84.0",
     "bootstrap": "^5.3.8",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "notchpay-client": "^0.2.0-beta",
     "rxjs": "~7.8.0",
