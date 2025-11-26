@@ -2589,7 +2589,7 @@ canvas {
     --bs-danger-rgb: 219, 20, 54;
     --bs-light-rgb: 241, 245, 249;
     --bs-dark-rgb: 15, 23, 42;
-    --bs-primary-text-emphasis: #bcc4e7;
+    --bs-primary-text-emphasis: #0022C0;
     --bs-secondary-text-emphasis: #5a5d60;
     --bs-success-text-emphasis: #003303;
     --bs-info-text-emphasis: #055160;
@@ -2597,7 +2597,7 @@ canvas {
     --bs-danger-text-emphasis: #580816;
     --bs-light-text-emphasis: #334155;
     --bs-dark-text-emphasis: #334155;
-    --bs-primary-bg-subtle: #e8d8ff;
+    --bs-primary-bg-subtle: #EBEDFA;
     --bs-secondary-bg-subtle: #f9fafc;
     --bs-success-bg-subtle: #cce6ce;
     --bs-info-bg-subtle: #cff4fc;
