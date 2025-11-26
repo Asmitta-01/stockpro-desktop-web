@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="offset-xl-3 col-xl-5 col-md-5">
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" method="post" [action]="formUrl" target="_blank" novalidate>
                     <div>
                         <h4 class="mb-1">Abonnez-vous à notre newsletter</h4>
                         <p>Recevez les dernières mises à jour, astuces et nouveautés sur StockPro. Aucun spam, juste
@@ -23,12 +23,14 @@
                         <div class="row g-2">
                             <div class="col-md-9 col-8">
                                 <label for="subscribeEmail" class="visually-hidden">Email</label>
-                                <input type="email" class="form-control" id="subscribeEmail" placeholder="Adresse email"
-                                    required />
+                                <input type="email" name="EMAIL" class="form-control" id="subscribeEmail"
+                                    placeholder="Adresse email" required>
                                 <div class="invalid-feedback">Veuillez entrer votre email.</div>
                             </div>
                             <div class="col-md-3 col-4">
                                 <div>
+                                    <input type="text" class="d-none" name="b_6761a6214f504cd48b5a248c0_6705a369aa"
+                                        tabindex="-1" value="">
                                     <button type="submit" class="btn btn-primary">S'abonner</button>
                                 </div>
                             </div>
@@ -54,7 +56,8 @@
                     <a href="https://wa.me/237656775556" class="text-reset btn btn-whatsapp btn-icon" target="_blank">
                         <i class="bi bi-whatsapp"></i>
                     </a>
-                    <a href="#!" class="text-reset btn btn-facebook btn-icon">
+                    <a href="https://www.facebook.com/profile.php?id=61584061015316"
+                        class="text-reset btn btn-facebook btn-icon" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-facebook" viewBox="0 0 16 16">
                             <path
