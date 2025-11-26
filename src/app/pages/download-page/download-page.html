@@ -3,97 +3,7 @@
     <app-subpage-header></app-subpage-header>
 
     @if (!showLicensePurchase) {
-    <section class="mb-xl-8">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="mb-0">Téléchargez StockPro Desktop</h1>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-7 col-md-12 mt-6">
-                    <div class="mb-5">
-                        <h2 class="h3 mb-3">Configuration système requise</h2>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><strong>OS:</strong> Windows 7, 8, 10 & 11</li>
-                            <li class="mb-2"><strong>RAM:</strong> 1 GB minimum, 4 GB recommandé</li>
-                            <li class="mb-2"><strong>Stockage:</strong> 500 MB d'espace libre</li>
-                            <li class="mb-2"><strong>Réseau:</strong> Aucune connexion internet requise</li>
-                        </ul>
-                    </div>
-
-                    <div class="mb-5">
-                        <h2 class="h3 mb-3">Choisissez le lien de téléchargement</h2>
-                        <div class="row g-3">
-                            <div class="col-md-6 text-center">
-                                <a href="https://github.com/Asmitta-01/stockpro-desktop/releases/download/1.6.1.10/StockPro-Setup.exe"
-                                    download="StockPro Setup" class="btn btn-primary w-100">
-                                    <i class="bi bi-windows me-2"></i>Télécharger
-                                </a>
-                                <span class="small mt-3">
-                                    Taille: 40 MB • Mise à jour : 21 Jan 2025
-                                </span>
-                            </div>
-                            <div class="col-md-6 text-center">
-                                <a href='https://stockpro-desktop.fr.uptodown.com/windows'
-                                    title='Télécharger StockPro Desktop' class="btn btn-outline-primary w-100"
-                                    target="_blank">
-                                    <img src='https://stc.utdstc.com/img/mediakit/isotipo.png'
-                                        alt='Télécharger StockPro Desktop' height="16" class="me-2">
-                                    Télécharger sur UpToDown
-                                    <i class="bi bi-box-arrow-up-right ms-2"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-5">
-                        <h2 class="h3 mb-3">Installation</h2>
-                        <ol class="ps-3">
-                            <li class="mb-2">Téléchargez le fichier d'installation en cliquant sur "Télécharger".</li>
-                            <li class="mb-2">Double-cliquez sur le fichier téléchargé pour lancer l'installateur.</li>
-                            <li class="mb-2">Suivez les invites de l'assistant d'installation.</li>
-                            <li class="mb-2">Ouvrez StockPro depuis le raccourci créé sur le bureau.</li>
-                        </ol>
-
-                        <p class="small mb-0 mt-2">
-                            Aucune connexion Internet n'est requise après l'installation.
-                            Pour le mode LAN, connectez vos postes sur le même réseau local.
-                        </p>
-                    </div>
-
-                </div>
-                <div class="col-lg-4 offset-lg-1 col-md-12">
-                    <div class="position-relative">
-                        <figure class="mb-4">
-                            <img src="images/mockup.webp" class="img-fluid object-fit-cover rounded-3"
-                                alt="StockPro Desktop">
-                        </figure>
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Téléchargement sécurisé</h5>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="mb-1">
-                                        <i class="bi bi-shield-check text-success me-2"></i>Fichier vérifié
-                                    </li>
-                                    <li class="mb-1">
-                                        <i class="bi bi-award text-success me-2"></i>
-                                        Certifié par Uptodown.com
-                                    </li>
-                                    <li class="mb-1">
-                                        <i class="bi bi-cloud-arrow-down text-success me-2"></i>
-                                        Mise à jour automatique
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <app-software-download></app-software-download>
     <app-software-screenshots></app-software-screenshots>
     } @else {
     <!-- License Purchase Flow -->
@@ -105,13 +15,21 @@
                 </div>
             </div>
 
-            <!-- User Info Form -->
-            @if (currentStep === 'form') {
+            @if (isLoadingLicense()) {
+            <div class="row my-6">
+                <div class="col-lg-8 col-md-10 mx-auto text-center">
+                    <div class="spinner-border text-primary" role="status" style="height: 250px; width: 250px;">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                    <p class="mt-4">Génération de votre licence en cours...</p>
+                </div>
+            </div>
+            }@else if (currentStep === 'form') {
             <div class="row">
                 <div class="col-lg-9 col-md-10 mx-auto">
                     <div class="row g-4">
                         <div class="col-md-7">
-                            <div class="card">
+                            <div class="card h-100">
                                 <div class="card-body p-5">
                                     <h3 class="mb-4">Informations de commande</h3>
                                     <form (ngSubmit)="onSubmitForm()" #userForm="ngForm">
@@ -150,9 +68,13 @@
                                                     vie</small>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-lg w-100"
+                                        <button type="submit" class="btn btn-primary w-100"
                                             [disabled]="!userForm.valid">
                                             Procéder au paiement
+                                            @if (isSavingData()) {
+                                            <span class="spinner-border ms-2 spinner-border-sm"
+                                                aria-hidden="true"></span>
+                                            }
                                         </button>
                                     </form>
                                 </div>

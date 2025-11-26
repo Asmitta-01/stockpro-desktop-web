@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Navbar } from "../../components/navbar/navbar";
 import { SubpageHeader } from "../../components/subpage-header/subpage-header";
 import { SoftwareScreenshots } from "../../components/software-screenshots/software-screenshots";
@@ -9,17 +9,19 @@ import { SupabaseService } from '../../services/supabase-service';
 import { UserInfo, PaymentData } from '../../models/user-info.interface';
 import { PlanService } from '../../services/plan.service';
 import { PricingPlan } from '../../models/pricing-plan.model';
-import { response } from 'express';
+import { NotchpayClient } from 'notchpay-client';
+import { environment } from '../../../environments/environment.development';
+import { SoftwareDownload } from "../../components/software-download/software-download";
 
 @Component({
   selector: 'app-download-page',
-  imports: [CommonModule, FormsModule, Navbar, SubpageHeader, SoftwareScreenshots],
+  imports: [CommonModule, FormsModule, Navbar, SubpageHeader, SoftwareScreenshots, SoftwareDownload],
   templateUrl: './download-page.html',
   styleUrl: './download-page.css',
 })
 export class DownloadPage implements OnInit {
   showLicensePurchase = false;
-  currentStep: 'form' | 'success' = 'form';
+  currentStep!: 'form' | 'success';
   userInfo: UserInfo = {
     firstName: '',
     lastName: '',
@@ -31,6 +33,9 @@ export class DownloadPage implements OnInit {
   paymentId = '';
   selectedPlan?: PricingPlan;
 
+  isSavingData = signal(false);
+  isLoadingLicense = signal(false);
+
   constructor(
     private route: ActivatedRoute,
     private supabaseService: SupabaseService,
@@ -38,15 +43,20 @@ export class DownloadPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.currentStep = 'form';
     this.route.queryParams.subscribe(params => {
       const licenseParam = params['license'];
       if (licenseParam) {
         this.showLicensePurchase = true;
         this.selectedPlan = this.planService.getPlanByName(licenseParam) || this.planService.getFreePlan();
       }
-      if (params['payment']) {
-        this.paymentId = params['payment'];
-        this.onPaymentSuccess();
+      const paymentParam = params['payment'];
+      if (paymentParam) {
+        this.showLicensePurchase = true;
+        this.currentStep = 'success';
+        this.isLoadingLicense.set(true);
+        this.paymentId = paymentParam;
+        this.onPaymentSuccess(params);
       }
     });
   }
@@ -56,6 +66,7 @@ export class DownloadPage implements OnInit {
       alert('Veuillez remplir tous les champs obligatoires');
       return;
     }
+    this.isSavingData.set(true);
 
     this.paymentId = this.generateId();
     const amount = this.selectedPlan?.price ?? 25000;
@@ -74,6 +85,7 @@ export class DownloadPage implements OnInit {
 
     try {
       await this.supabaseService.savePayment(paymentData);
+      this.isSavingData.set(false);
       this.redirectToNotchPay();
     } catch (error) {
       console.log(error);
@@ -81,23 +93,36 @@ export class DownloadPage implements OnInit {
     }
   }
 
-  redirectToNotchPay() {
-    const notchPayUrl = `https://api.notchpay.co/payments/initialize`;
+  async redirectToNotchPay() {
+    const notchpay = new NotchpayClient({ publicKey: environment.notchpayPublicKey });
     const paymentData = {
       amount: this.selectedPlan?.price ?? 25000,
       currency: this.selectedPlan?.currency ?? 'XAF',
-      email: this.userInfo.email,
       reference: this.paymentId,
+      description: "Achat d'une licence pour le logiciel StockPro",
+      customer: {
+        email: this.userInfo.email,
+        name: this.userInfo.firstName + ' ' + this.userInfo.lastName
+      },
       callback: `${window.location.origin}/download?payment=${this.paymentId}`
     };
 
-    window.location.href = `${notchPayUrl}?${new URLSearchParams(paymentData as any).toString()}`;
+    try {
+      const response = await notchpay.payments.create(paymentData);
+      const paymentUrl = response.authorization_url;
+      window.location.href = paymentUrl;
+    } catch (error) {
+      console.error('Error creating payment:', error);
+      alert('Une erreur est survenue lors de la création du paiement. Veuillez réessayer.');
+      await this.supabaseService.updatePaymentStatus(this.paymentId, 'failed');
+    }
   }
 
-  async onPaymentSuccess() {
+  async onPaymentSuccess(params: Params) {
     this.licenseKey = this.generateLicenseKey();
-    await this.supabaseService.updatePaymentStatus(this.paymentId, 'completed', this.licenseKey);
-    this.currentStep = 'success';
+    const providerReference = params['reference'];
+    await this.supabaseService.updatePaymentStatus(this.paymentId, 'completed', providerReference, this.licenseKey);
+    this.isLoadingLicense.set(false);
   }
 
   downloadLicenseKey() {

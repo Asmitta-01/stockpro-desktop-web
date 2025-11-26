@@ -44,9 +44,10 @@ export class SupabaseService {
     return data;
   }
 
-  async updatePaymentStatus(paymentId: string, status: string, licenseKey?: string): Promise<any> {
-    const updateData: any = { status, updated_at: new Date() };
+  async updatePaymentStatus(paymentId: string, status: string, providerReference?: string, licenseKey?: string): Promise<any> {
+    const updateData: any = { status: status, updated_at: new Date() };
     if (licenseKey) updateData.license_key = licenseKey;
+    if (providerReference) updateData.provider_reference = providerReference;
 
     const { data, error } = await this.supabase
       .from('payments')

@@ -1,0 +1,87 @@
+<section class="mb-xl-8">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mb-0">Téléchargez StockPro Desktop</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-7 col-md-12 mt-6">
+                <div class="mb-5">
+                    <h2 class="h3 mb-3">Configuration système requise</h2>
+                    <ul class="list-unstyled">
+                        @for (item of config; track $index) {
+                        <li class="mb-2"><strong>{{ item.at(0) }}:</strong> {{ item.at(1) }}</li>
+                        }
+                    </ul>
+                </div>
+
+                <div class="mb-5">
+                    <h2 class="h3 mb-3">Choisissez le lien de téléchargement</h2>
+                    <div class="row g-3">
+                        <div class="col-md-6 text-center">
+                            <a [href]="downloadLink" download="StockPro Setup" class="btn btn-primary w-100">
+                                <i class="bi bi-windows me-2"></i>Télécharger
+                            </a>
+                            <span class="small mt-3">
+                                Taille: 40 MB • Mise à jour : 21 Jan 2025
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <a [href]="uptodownLink" title='Télécharger StockPro Desktop'
+                                class="btn btn-outline-primary w-100" target="_blank">
+                                <img src='https://stc.utdstc.com/img/mediakit/isotipo.png'
+                                    alt='Télécharger StockPro Desktop' height="16" class="me-2">
+                                Télécharger sur UpToDown
+                                <i class="bi bi-box-arrow-up-right ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <h2 class="h3 mb-3">Installation</h2>
+                    <ol class="ps-3">
+                        <li class="mb-2">Téléchargez le fichier d'installation en cliquant sur "Télécharger".</li>
+                        <li class="mb-2">Double-cliquez sur le fichier téléchargé pour lancer l'installateur.</li>
+                        <li class="mb-2">Suivez les invites de l'assistant d'installation.</li>
+                        <li class="mb-2">Ouvrez StockPro depuis le raccourci créé sur le bureau.</li>
+                    </ol>
+
+                    <p class="small mb-0 mt-2">
+                        Aucune connexion Internet n'est requise après l'installation.
+                        Pour le mode LAN, connectez vos postes sur le même réseau local.
+                    </p>
+                </div>
+
+            </div>
+            <div class="col-lg-4 offset-lg-1 col-md-12">
+                <div class="position-relative">
+                    <figure class="mb-4">
+                        <img src="images/mockup.webp" class="img-fluid object-fit-cover rounded-3"
+                            alt="StockPro Desktop">
+                    </figure>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Téléchargement sécurisé</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-1">
+                                    <i class="bi bi-shield-check text-success me-2"></i>Fichier vérifié
+                                </li>
+                                <li class="mb-1">
+                                    <i class="bi bi-award text-success me-2"></i>
+                                    Certifié par Uptodown.com
+                                </li>
+                                <li class="mb-1">
+                                    <i class="bi bi-cloud-arrow-down text-success me-2"></i>
+                                    Mise à jour automatique
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
