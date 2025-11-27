@@ -1,0 +1,12 @@
+.lead {
+    color: #495057;
+}
+
+.card h3 {
+    font-weight: 700;
+}
+
+.card img {
+    height: 360px;
+    object-fit: cover;
+}

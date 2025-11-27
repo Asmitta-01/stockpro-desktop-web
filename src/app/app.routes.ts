@@ -4,6 +4,7 @@ import { FeaturesPage } from './pages/features-page/features-page';
 import { ReasonsPage } from './pages/reasons-page/reasons-page';
 import { DownloadPage } from './pages/download-page/download-page';
 import { HelpCenterPage } from './pages/help-center/help-center';
+import { CustomizationPage } from './pages/customization/customization';
 
 export const routes: Routes = [
     { path: '', component: LandingPage },
@@ -11,4 +12,5 @@ export const routes: Routes = [
     { path: 'reasons', component: ReasonsPage, title: 'Pourquoi choisir StockPro' },
     { path: 'download', component: DownloadPage, title: 'Téléchargement de StockPro' }
     , { path: 'help', component: HelpCenterPage, title: "Centre d'aide" }
+    , { path: 'customization', component: CustomizationPage, title: 'Personnalisation' }
 ];
