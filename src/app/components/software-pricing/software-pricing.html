@@ -56,43 +56,7 @@
                 </div>
                 @for (plan of plans; track plan.id) {
                 <div class="col-xl-4 col-lg-4 col-md-6 col-12">
-                    <!--card-->
-                    <div class="card pricing h-100">
-                        <div class="card-body">
-                            <h2 class="mb-4 d-flex align-items-center">
-                                <div class="price-text">
-                                    <div class="price price-show">
-                                        <span>{{ plan.price| currency : getCurrentCurrency() }}</span>
-                                        <span class="price-duration fs-6 text-body mt-auto mb-2">/à vie</span>
-                                    </div>
-                                </div>
-                            </h2>
-                            <div class="mb-6">
-                                <h3>{{plan.name}}</h3>
-                                <p class="mb-0">{{ plan.description }}</p>
-                            </div>
-
-                            <ul class="list-unstyled mb-0">
-                                @for (benefit of plan.benefits; track $index) {
-                                <li class="mb-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
-                                        class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                                        <path
-                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                                    </svg>
-                                    <span class="ms-3">{{ benefit }}</span>
-                                </li>
-                                }
-                            </ul>
-                            <div class="d-grid mt-6">
-                                <a routerLink="download" [queryParams]="{ 'license' : plan.name | lowercase}"
-                                    class="btn btn-primary">
-                                    {{ plan.price| currency : getCurrentCurrency() }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--card-->
+                    <app-single-pricing-plan [plan]="plan"></app-single-pricing-plan>
                 </div>
                 }
             </div>

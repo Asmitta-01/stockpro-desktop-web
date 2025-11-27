@@ -18,23 +18,33 @@
                 </div>
 
                 <div class="mb-5">
-                    <h2 class="h3 mb-3">Choisissez le lien de téléchargement</h2>
+                    <h2 class="h3 mb-3">Choisissez l'option qui vous convient</h2>
                     <div class="row g-3">
                         <div class="col-md-6 text-center">
                             <a [href]="downloadLink" download="StockPro Setup" class="btn btn-primary w-100">
                                 <i class="bi bi-windows me-2"></i>Télécharger
                             </a>
                             <span class="small mt-3">
-                                Taille: 40 MB • Mise à jour : 21 Jan 2025
+                                Taille: 40 MB • Mise à jour : 27 Nov 2025
                             </span>
                         </div>
                         <div class="col-md-6 text-center">
-                            <a [href]="uptodownLink" title='Télécharger StockPro Desktop'
-                                class="btn btn-outline-primary w-100" target="_blank">
-                                <img src='https://stc.utdstc.com/img/mediakit/isotipo.png'
-                                    alt='Télécharger StockPro Desktop' height="16" class="me-2">
-                                Télécharger sur UpToDown
-                                <i class="bi bi-box-arrow-up-right ms-2"></i>
+                            <button data-bs-target="#pricing" data-bs-toggle="modal" title='Acheter une clé de licence'
+                                class="btn btn-outline-primary w-100">
+                                <i class="bi bi-cart3 me-2"></i>Acheter une licence
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <h2 class="h3 mb-3">Télécharger sur une autre plateforme</h2>
+                    <div class="row g-3">
+                        <div class="col">
+                            <a href='https://stockpro-desktop.fr.uptodown.com/windows' target="_blank"
+                                title='Télécharger StockPro Desktop'>
+                                <img src='https://stc.utdstc.com/img/mediakit/download-gio-big.png'
+                                    alt='Télécharger StockPro Desktop'>
                             </a>
                         </div>
                     </div>
@@ -84,4 +94,29 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="pricing" style="--bs-modal-zindex: 10000" tabindex="-1" role="dialog"
+        aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">
+                        Choisissez le type de licence approprié
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        @for (plan of plans; track $index) {
+                        <div class="col-md-6 col-12">
+                            <app-single-pricing-plan [plan]="plan"></app-single-pricing-plan>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
