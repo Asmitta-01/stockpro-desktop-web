@@ -2,7 +2,7 @@
 <header>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-boxed mx-auto mt-lg-4" id="navId">
-            <a class="navbar-brand" href="/" title="Go to homepage">
+            <a class="navbar-brand" href="/" title="Aller à la page d'accueil">
                 <img src="logo.png" height="32">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -14,7 +14,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#home">Accueil</a>
+                        <a class="nav-link" href="/#home">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#features">Fonctionnalités</a>
@@ -29,9 +29,9 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Extensions</a>
                         <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item mb-3 text-body" href="https://block.codescandy.com/docs/index.html">
+                            <a class="dropdown-item mb-3 text-body disabled" href="#!">
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-router fs-4 text-primary"></i>
+                                    <i class="bi bi-router fs-4 text-secondary"></i>
                                     <div class="ms-3 lh-1">
                                         <h5 class="mb-1">StockPro Cloud Sync</h5>
                                         <p class="mb-0 fs-6">Accès à distance</p>
@@ -39,13 +39,12 @@
                                 </div>
                             </a>
 
-                            <a class="dropdown-item text-body" href="https://block.codescandy.com/docs/changelog.html">
+                            <a class="dropdown-item text-body disabled" href="#!">
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-arrow-bar-down fs-4 text-primary"></i>
+                                    <i class="bi bi-arrow-bar-down fs-4 text-secondary"></i>
                                     <div class="ms-3 lh-1">
                                         <h5 class="mb-1">
                                             Personnalisation
-                                            <span class="text-primary ms-1"></span>
                                         </h5>
                                         <p class="mb-0 fs-6">Propre à votre besoin</p>
                                     </div>
@@ -60,7 +59,7 @@
                             aria-expanded="false">
                             {{ getCurrentCurrency() }}
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu d-none">
                             @for (item of getCurrencies(); track $index) {
                             <li>
                                 @if (getCurrentCurrency() == item) {
@@ -73,7 +72,7 @@
                             }
                         </ul>
                     </div>
-                    <a routerLink="download" class="btn btn-primary">Télécharger</a>
+                    <a routerLink="/download" class="btn btn-primary">Télécharger</a>
                 </div>
             </div>
         </nav>
