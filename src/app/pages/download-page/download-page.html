@@ -118,10 +118,11 @@
                     <div class="card">
                         <div class="card-body p-5">
                             <h4 class="mb-4">Votre clé de licence</h4>
-                            <div class="bg-light p-3 rounded mb-4">
+                            <div class="align-items-center bg-light d-flex gap-2 mb-4 p-3 rounded">
                                 <code class="fs-5">{{ licenseKey }}</code>
-                                <button class="btn btn-outline-secondary btn-sm ms-3" (click)="downloadLicenseKey()">
-                                    <i class="bi bi-download me-1"></i>Télécharger
+                                <button class="btn btn-outline-dark btn-sm ms-3" (click)="downloadLicenseKey()">
+                                    <i class="bi bi-download"></i>
+                                    <span class="d-none ms-1 d-md-block">Télécharger</span>
                                 </button>
                             </div>
 
@@ -129,14 +130,16 @@
                             <ol class="mb-4">
                                 <li class="mb-2">Téléchargez et installez StockPro Desktop</li>
                                 <li class="mb-2">Ouvrez le logiciel</li>
-                                <li class="mb-2">Allez dans <strong>Aide → Activer la licence</strong></li>
+                                <li class="mb-2">
+                                    Allez dans <strong>Paramètres → A propos du logiciel → Activer la licence</strong>
+                                </li>
                                 <li class="mb-2">Saisissez votre clé de licence ci-dessus</li>
                                 <li class="mb-2">Cliquez sur <strong>Activer</strong></li>
                             </ol>
 
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <a href="#" class="btn btn-success w-100">
+                                    <a [href]="downloadLink" class="btn btn-success w-100">
                                         <i class="bi bi-download me-2"></i>Télécharger StockPro
                                     </a>
                                 </div>
@@ -150,6 +153,8 @@
                     </div>
                 </div>
             </div>
+            } @else {
+
             }
         </div>
     </section>

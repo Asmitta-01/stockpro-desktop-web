@@ -21,7 +21,7 @@ import { SoftwareDownload } from "../../components/software-download/software-do
 })
 export class DownloadPage implements OnInit {
   showLicensePurchase = false;
-  currentStep!: 'form' | 'success';
+  currentStep!: 'form' | 'success' | 'failure';
   userInfo: UserInfo = {
     firstName: '',
     lastName: '',
@@ -33,6 +33,7 @@ export class DownloadPage implements OnInit {
   paymentId = '';
   selectedPlan?: PricingPlan;
 
+  downloadLink = 'https://github.com/Asmitta-01/stockpro-desktop/releases/download/1.6.1.10/StockPro-Setup.exe';
   isSavingData = signal(false);
   isLoadingLicense = signal(false);
 
@@ -53,10 +54,17 @@ export class DownloadPage implements OnInit {
       const paymentParam = params['payment'];
       if (paymentParam) {
         this.showLicensePurchase = true;
-        this.currentStep = 'success';
-        this.isLoadingLicense.set(true);
-        this.paymentId = paymentParam;
-        this.onPaymentSuccess(params);
+        const paymentStatus = params['status'];
+        if (paymentStatus === 'complete') {
+          this.currentStep = 'success';
+          this.isLoadingLicense.set(true);
+          this.paymentId = paymentParam;
+          this.onPaymentSuccess(params);
+        } else {
+          this.currentStep = 'failure';
+          const providerReference = params['reference'];
+          this.supabaseService.updatePaymentStatus(this.paymentId, 'failed', providerReference);
+        }
       }
     });
   }
@@ -89,7 +97,7 @@ export class DownloadPage implements OnInit {
       this.redirectToNotchPay();
     } catch (error) {
       console.log(error);
-      alert('Erreur lors de l\'enregistrement. Veuillez réessayer.');
+      alert('Erreur lors de l\'enregistrement. Veuillez réessayer plus tard.');
     }
   }
 
@@ -119,14 +127,27 @@ export class DownloadPage implements OnInit {
   }
 
   async onPaymentSuccess(params: Params) {
-    this.licenseKey = this.generateLicenseKey();
+    await this.updateUserInfo();
+    this.licenseKey = await this.generateLicenseKey();
     const providerReference = params['reference'];
     await this.supabaseService.updatePaymentStatus(this.paymentId, 'completed', providerReference, this.licenseKey);
     this.isLoadingLicense.set(false);
   }
 
+  private async updateUserInfo() {
+    try {
+      const paymentData = await this.supabaseService.getPayment(this.paymentId);
+      console.log(paymentData);
+      this.userInfo = paymentData?.userInfo as UserInfo;
+      this.selectedPlan = this.planService.getPlanByName(paymentData?.planName || '') || this.planService.getFreePlan();
+    } catch (error) {
+      console.log(error);
+      alert('Erreur lors de la récupération des informations utilisateur.');
+    }
+  }
+
   downloadLicenseKey() {
-    const content = `StockPro Desktop License Key\n\nNom: ${this.userInfo.firstName} ${this.userInfo.lastName}\nEmail: ${this.userInfo.email}\nClé de licence: ${this.licenseKey}\n\nInstructions:\n1. Ouvrez StockPro Desktop\n2. Allez dans Aide > Activer la licence\n3. Saisissez votre clé de licence\n4. Cliquez sur Activer`;
+    const content = `StockPro Desktop License Key\n\nNom: ${this.userInfo.firstName} ${this.userInfo.lastName}\nEmail: ${this.userInfo.email}\nClé de licence: ${this.licenseKey}\n\nInstructions:\n1. Ouvrez StockPro Desktop\n2. Allez dans Paramètres > A propos du logiciel > Activer la licence\n3. Saisissez votre clé de licence\n4. Cliquez sur Activer`;
 
     const blob = new Blob([content], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
@@ -141,14 +162,13 @@ export class DownloadPage implements OnInit {
     return Math.random().toString(36).substring(2, 9);
   }
 
-  private generateLicenseKey(): string {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let result = '';
-    for (let i = 0; i < 20; i++) {
-      if (i > 0 && i % 4 === 0) result += '-';
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
+  private async generateLicenseKey(): Promise<string> {
+    try {
+      return await this.supabaseService.generateLicenseKey(this.userInfo.email, this.selectedPlan?.type ?? 'free');
+    } catch (error) {
+      console.error('Error generating license key:', error);
+      throw error;
     }
-    return result;
   }
 
   /** Function to fetch current user IP address */

@@ -89,4 +89,13 @@ export class SupabaseService {
 
     return result;
   }
+
+  async generateLicenseKey(email: string, type: string): Promise<string> {
+    const { data, error } = await this.supabase.functions.invoke('generate-license', {
+      body: { email: email, type: type },
+    })
+
+    if (error) throw error;
+    return data.license;
+  }
 }

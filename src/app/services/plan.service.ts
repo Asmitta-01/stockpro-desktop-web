@@ -10,6 +10,7 @@ export class PlanService {
             description: 'Essayer StockPro gratuitement',
             price: 0,
             currency: 'XAF',
+            type: 'free',
             benefits: [
                 'Suivi de stock et ventes illimités',
                 'Gestion de produits(max: 100) et catégories',
@@ -26,6 +27,7 @@ export class PlanService {
             description: 'Pour les commerces qui veulent aller plus loin dans la gestion et le suivi de leur activité.',
             price: 70000,
             currency: 'XAF',
+            type: 'standard',
             benefits: [
                 'Suivi de stock et ventes illimités',
                 'Gestion de produits et catégories illimités',
@@ -44,6 +46,7 @@ export class PlanService {
             description: 'Pour les entreprises et dépôts qui veulent tout contrôler avec précision.',
             price: 120000,
             currency: 'XAF',
+            type: 'professional',
             benefits: [
                 'Fonctionnalités du pack Standard',
                 'Gestion de plusieurs points de vente',
