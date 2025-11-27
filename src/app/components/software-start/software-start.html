@@ -12,8 +12,11 @@
                     </div>
                     <div class="mb-7">
                         <div class="mb-3">
-                            <a routerLink="download" class="btn btn-primary me-2">Télécharger maintenant</a>
-                            <a href="#!" class="btn btn-white">Comment ça fonctionne</a>
+                            <a routerLink="download" class="btn btn-primary me-md-2 mb-3 mb-md-0">Télécharger
+                                maintenant</a>
+                            <button class="btn btn-white" data-bs-toggle="modal" data-bs-target="#howItWorksModal">
+                                Comment ça fonctionne
+                            </button>
                         </div>
                         <small>📣 Sans abonnement — 100% local — Facile à utiliser</small>
                     </div>
@@ -45,4 +48,128 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="howItWorksModal" tabindex="-1" aria-labelledby="howItWorksModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="howItWorksModalLabel">Comment ça fonctionne</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p>
+                        <strong>StockPro Desktop</strong> est un logiciel de gestion de stock conçu pour fonctionner
+                        entièrement hors ligne,
+                        avec la possibilité de collaborer en réseau local (LAN). Voici comment il fonctionne au
+                        quotidien :
+                    </p>
+
+                    <h6 class="mt-3">1. Installation rapide</h6>
+                    <p>
+                        Après téléchargement, vous installez StockPro en moins de deux minutes. Aucun compte et aucune
+                        configuration complexe
+                        ne sont nécessaires : ouvrez le logiciel et commencez à travailler immédiatement.
+                    </p>
+
+                    <h6 class="mt-3">2. Création de votre inventaire</h6>
+                    <p>
+                        Ajoutez vos produits (nom, prix, stock, catégorie, description). StockPro met automatiquement à
+                        jour les niveaux théoriques et physiques, calcule les valeurs d’inventaire et organise vos
+                        articles pour un accès rapide.
+                    </p>
+
+                    <h6 class="mt-3">3. Gestion des opérations</h6>
+                    <p>
+                        Chaque vente, achat ou mouvement modifie instantanément votre stock.
+                        Vous pouvez :
+                    </p>
+                    <ul>
+                        <li>enregistrer une vente rapidement,</li>
+                        <li>ajouter une facture d’achat et mettre à jour l’inventaire,</li>
+                        <li>effectuer des ajustements manuels si nécessaire.</li>
+                    </ul>
+                    <p>
+                        Toutes les opérations sont enregistrées et consultables à tout moment.
+                    </p>
+
+                    <h6 class="mt-3">4. Suivi des clients et fournisseurs</h6>
+                    <p>
+                        Créez vos clients et fournisseurs et suivez pour chacun :
+                    </p>
+                    <ul>
+                        <li>les achats effectués,</li>
+                        <li>les ventes réalisées,</li>
+                        <li>l’historique complet des transactions,</li>
+                        <li>les produits les plus demandés.</li>
+                    </ul>
+                    <p>
+                        Cela vous permet d'améliorer la relation commerciale et de mieux préparer vos commandes.
+                    </p>
+
+                    <h6 class="mt-3">5. Rapports et analyses</h6>
+                    <p>
+                        StockPro génère automatiquement plusieurs rapports pour vous aider à piloter votre activité :
+                    </p>
+                    <ul>
+                        <li>rapports de stock (quantités, valeurs, alertes),</li>
+                        <li>rapports de ventes (tendances, meilleures ventes),</li>
+                        <li>rapports d’achats (montants, périodes),</li>
+                        <li>inventaires détaillés,</li>
+                        <li>analyses par catégories (version Pro).</li>
+                    </ul>
+                    <p>
+                        Les rapports peuvent être exportés ou visualisés sous forme de graphiques clairs et lisibles.
+                    </p>
+
+                    <h6 class="mt-3">6. Collaboration en réseau local (version Pro)</h6>
+                    <p>
+                        Avec le pack Pro, plusieurs postes peuvent travailler ensemble via votre réseau Wi-Fi ou câblé.
+                        Trois modes sont disponibles :
+                    </p>
+                    <ul>
+                        <li><strong>Mode Host</strong> : un PC devient le serveur,</li>
+                        <li><strong>Mode Client</strong> : les autres postes se connectent automatiquement,</li>
+                        <li><strong>Mode Hors Ligne</strong> : travail individuel sans réseau.</li>
+                    </ul>
+                    <p>
+                        La synchronisation est instantanée, sans connexion Internet, grâce à la découverte automatique
+                        du serveur.
+                    </p>
+
+                    <h6 class="mt-3">7. Gestion multi-boutiques (version Pro)</h6>
+                    <p>
+                        Vous pouvez gérer plusieurs magasins dans la même interface. Chaque boutique peut avoir ses
+                        produits,
+                        ses opérations, son personnel et ses rapports dédiés.
+                    </p>
+
+                    <h6 class="mt-3">8. Sauvegarde et sécurité</h6>
+                    <p>
+                        Toutes les données sont stockées localement sur votre PC. Vous pouvez effectuer des sauvegardes
+                        manuelles ou planifier des sauvegardes automatiques selon vos besoins.
+                        La version Pro ajoute une couche d’authentification sécurisée lors du travail en réseau.
+                    </p>
+
+                    <p class="mt-4 mb-0">
+                        <strong>En résumé :</strong><br>
+                        StockPro vous permet de suivre vos stocks, vos ventes et vos achats en quelques clics,
+                        d’analyser votre activité et de collaborer efficacement, même sans connexion Internet.
+                        C’est une solution simple, fiable et puissante pour les commerces, dépôts et entreprises qui
+                        veulent garder le contrôle.
+                    </p>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </section>
