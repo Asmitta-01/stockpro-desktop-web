@@ -153,8 +153,53 @@
                     </div>
                 </div>
             </div>
-            } @else {
+            } @else if(currentStep === 'failure') {
+            <!-- Failure Page -->
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="text-center mb-5">
+                        <i class="bi bi-x-circle-fill text-danger" style="font-size: 4rem;"></i>
+                        <h2 class="mt-3">Paiement échoué</h2>
+                        <p class="lead">Une erreur est survenue pendant le paiement ou la génération de la licence.</p>
+                        <p class="small text-muted">Si vous avez été débité, ne vous inquiétez pas — contactez notre
+                            support avec votre preuve de paiement et nous réglerons cela rapidement.</p>
+                    </div>
 
+                    <div class="card">
+                        <div class="card-body p-5">
+                            <h4 class="mb-4">Que pouvez-vous faire ?</h4>
+                            <ul class="mb-4">
+                                <li class="mb-2">Rafraîchir la page et vérifier si le paiement a été confirmé.</li>
+                                <li class="mb-2">Recommencer le processus de paiement en revenant à la page de
+                                    téléchargement.</li>
+                                <li class="mb-2">Si vous avez déjà été débité, contactez notre support avec votre email
+                                    et votre preuve de paiement.</li>
+                            </ul>
+
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <button class="btn btn-secondary w-100"
+                                        onclick="location.reload()">Rafraîchir</button>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="/download" class="btn btn-primary w-100">Recommencer</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="/help" class="btn btn-outline-dark w-100">Contacter le support</a>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <p class="mb-1">
+                                    <strong>Si vous avez payé</strong> : envoyez-nous un email à <a class="fw-semibold"
+                                        href="mailto:tiwabrayan+stockpro@gmail.com">tiwabrayan+stockpro@gmail.com</a>
+                                    avec votre référence de paiement et l'ID de transaction.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             }
         </div>
     </section>
