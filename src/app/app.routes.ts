@@ -5,6 +5,7 @@ import { ReasonsPage } from './pages/reasons-page/reasons-page';
 import { DownloadPage } from './pages/download-page/download-page';
 import { HelpCenterPage } from './pages/help-center/help-center';
 import { CustomizationPage } from './pages/customization/customization';
+import { PrivacyPolicyPage } from './pages/privacy-policy/privacy-policy';
 
 export const routes: Routes = [
     { path: '', component: LandingPage },
@@ -12,5 +13,6 @@ export const routes: Routes = [
     { path: 'reasons', component: ReasonsPage, title: 'Pourquoi choisir StockPro' },
     { path: 'download', component: DownloadPage, title: 'Téléchargement de StockPro' }
     , { path: 'help', component: HelpCenterPage, title: "Centre d'aide" }
-    , { path: 'customization', component: CustomizationPage, title: 'Personnalisation' }
+    , { path: 'customization', component: CustomizationPage, title: 'Personnalisation' },
+    { path: 'privacy-policy', component: PrivacyPolicyPage, title: 'Politique de confidentialité' }
 ];
