@@ -16,7 +16,7 @@ export class PrivacyPolicyPage implements OnInit {
   constructor(private http: HttpClient) { };
 
   ngOnInit() {
-    this.http.get('/docs/privacy-policy.md', { responseType: 'text' })
+    this.http.get('docs/privacy-policy.md', { responseType: 'text' })
       .subscribe(html => {
         this.markdownContent = this.parseMarkdown(html);
       });

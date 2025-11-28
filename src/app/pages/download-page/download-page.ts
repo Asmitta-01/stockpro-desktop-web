@@ -33,7 +33,7 @@ export class DownloadPage implements OnInit {
   paymentId = '';
   selectedPlan?: PricingPlan;
 
-  downloadLink = 'https://github.com/Asmitta-01/stockpro-desktop/releases/download/1.6.1.10/StockPro-Setup.exe';
+  downloadLink = 'https://github.com/Asmitta-01/stockpro-desktop/releases/download/1.6.2.11/StockPro-Setup.exe';
   isSavingData = signal(false);
   isLoadingLicense = signal(false);
 

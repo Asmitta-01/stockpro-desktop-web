@@ -10,7 +10,7 @@ import { SinglePricingPlan } from "../single-pricing-plan/single-pricing-plan";
   styleUrl: './software-download.css',
 })
 export class SoftwareDownload implements OnInit {
-  downloadLink = 'https://github.com/Asmitta-01/stockpro-desktop/releases/download/1.6.1.10/StockPro-Setup.exe';
+  downloadLink = 'https://github.com/Asmitta-01/stockpro-desktop/releases/download/1.6.2.11/StockPro-Setup.exe';
   uptodownLink = 'https://stockpro-desktop.fr.uptodown.com/windows';
   config = [
     ["OS", "Windows 7, 8, 10 & 11"],
