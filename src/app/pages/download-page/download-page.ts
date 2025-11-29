@@ -29,6 +29,7 @@ export class DownloadPage implements OnInit {
     company: '',
     phone: ''
   };
+  hasReadPolicy = false;
   licenseKey = '';
   paymentId = '';
   selectedPlan?: PricingPlan;
@@ -70,7 +71,7 @@ export class DownloadPage implements OnInit {
   }
 
   async onSubmitForm() {
-    if (!this.userInfo.firstName || !this.userInfo.lastName || !this.userInfo.email) {
+    if (!this.userInfo.firstName || !this.userInfo.lastName || !this.userInfo.email || !this.hasReadPolicy) {
       alert('Veuillez remplir tous les champs obligatoires');
       return;
     }

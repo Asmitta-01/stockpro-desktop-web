@@ -6,6 +6,7 @@ import { DownloadPage } from './pages/download-page/download-page';
 import { HelpCenterPage } from './pages/help-center/help-center';
 import { CustomizationPage } from './pages/customization/customization';
 import { PrivacyPolicyPage } from './pages/privacy-policy/privacy-policy';
+import { RefundPolicy } from './pages/refund-policy/refund-policy';
 
 export const routes: Routes = [
     { path: '', component: LandingPage },
@@ -14,5 +15,6 @@ export const routes: Routes = [
     { path: 'download', component: DownloadPage, title: 'Téléchargement de StockPro' }
     , { path: 'help', component: HelpCenterPage, title: "Centre d'aide" }
     , { path: 'customization', component: CustomizationPage, title: 'Personnalisation' },
+    { path: 'refund-policy', component: RefundPolicy, title: 'Politique de licence et de remboursement' },
     { path: 'privacy-policy', component: PrivacyPolicyPage, title: 'Politique de confidentialité' }
 ];
