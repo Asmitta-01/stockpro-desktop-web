@@ -23841,7 +23841,7 @@ strong {
 }
 
 .pattern-square:after {
-    background-image: url(https://block.codescandy.com/assets/images/pattern/pattern-square.svg);
+    background-image: url(/images/illustrations/pattern-square.svg);
     background-position: top;
     bottom: 0;
     content: "";
