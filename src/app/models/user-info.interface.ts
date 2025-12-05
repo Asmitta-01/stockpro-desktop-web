@@ -16,6 +16,7 @@ export interface PaymentData {
   createdAt: Date;
   // Optional fields to map payments to plans and providers
   planName?: string;
+  discountId?: string;
   currency?: string;
   provider?: string;
   providerReference?: string;

@@ -25,7 +25,7 @@ export class PlanService {
             id: 1,
             name: 'Standard',
             description: 'Pour les commerces qui veulent aller plus loin dans la gestion et le suivi de leur activité.',
-            price: 70000,
+            price: 120000,
             currency: 'XAF',
             type: 'standard',
             benefits: [
@@ -44,7 +44,7 @@ export class PlanService {
             id: 2,
             name: 'Professionnel',
             description: 'Pour les entreprises et dépôts qui veulent tout contrôler avec précision.',
-            price: 120000,
+            price: 180000,
             currency: 'XAF',
             type: 'professional',
             benefits: [

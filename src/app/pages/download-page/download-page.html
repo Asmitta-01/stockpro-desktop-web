@@ -26,7 +26,7 @@
             </div>
             }@else if (currentStep === 'form') {
             <div class="row">
-                <div class="col-lg-9 col-md-10 mx-auto">
+                <div class="col-md-10 mx-auto">
                     <div class="row g-4">
                         <div class="col-md-7">
                             <div class="card h-100">
@@ -53,15 +53,40 @@
                                                 celle qui sera utilisée dans le logiciel lors de la première
                                                 utilisation.</p>
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Entreprise</label>
-                                            <input type="text" class="form-control" [(ngModel)]="userInfo.company"
-                                                name="company">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Entreprise</label>
+                                                <input type="text" class="form-control" [(ngModel)]="userInfo.company"
+                                                    name="company">
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Téléphone</label>
+                                                <input type="tel" class="form-control" [(ngModel)]="userInfo.phone"
+                                                    name="phone">
+                                            </div>
                                         </div>
                                         <div class="mb-4">
-                                            <label class="form-label">Téléphone</label>
-                                            <input type="tel" class="form-control" [(ngModel)]="userInfo.phone"
-                                                name="phone">
+                                            <label class="form-label">Code de réduction (optionnel)</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" [(ngModel)]="discountCode"
+                                                    name="discountCode" placeholder="Entrez votre code">
+                                                <button type="button" class="btn btn-outline-primary"
+                                                    (click)="applyDiscountCode()" [disabled]="!discountCode.trim()">
+                                                    Appliquer
+                                                </button>
+                                            </div>
+                                            @if (appliedDiscount() !== null) {
+                                            <div class="mt-2">
+                                                <small class="text-success">
+                                                    <i class="bi bi-check-circle me-1"></i>
+                                                    Code "{{ appliedDiscount()!.code }}" appliqué
+                                                    <button type="button" class="btn btn-link btn-sm p-0 ms-2"
+                                                        (click)="removeDiscount()">
+                                                        Supprimer
+                                                    </button>
+                                                </small>
+                                            </div>
+                                            }
                                         </div>
                                         <div class="mb-4">
                                             <div class="form-check form-check-inline small">
@@ -76,10 +101,26 @@
                                         </div>
                                         <div class="d-flex justify-content-between align-items-center mb-4">
                                             <div>
-                                                <h5 class="mb-0">Prix: {{ selectedPlan?.price | currency :
+                                                @if (hasDiscount) {
+                                                <div class="mb-1">
+                                                    <span class="text-decoration-line-through text-muted">{{
+                                                        selectedPlan?.price | currency : (selectedPlan?.currency ||
+                                                        'XAF') }}</span>
+                                                </div>
+                                                }
+                                                <h5 class="mb-0">Prix: {{ finalPrice | currency :
                                                     (selectedPlan?.currency || 'XAF') }}</h5>
                                                 <small class="text-muted">{{ selectedPlan?.name }} - Licence à
                                                     vie</small>
+                                                @if (globalDiscount() !== null && appliedDiscount() === null) {
+                                                <div class="mt-1">
+                                                    <small class="text-success">
+                                                        <i class="bi bi-tag me-1"></i>
+                                                        Promotion en cours: -{{ globalDiscount()!.value }}{{
+                                                        globalDiscount()!.type === 'percentage' ? '%' : ' FCFA' }}
+                                                    </small>
+                                                </div>
+                                                }
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary w-100"
@@ -99,8 +140,26 @@
                             <div class="card h-100">
                                 <div class="card-body p-4 d-flex flex-column">
                                     <h5 class="mb-3">{{ selectedPlan?.name || 'Plan' }}</h5>
-                                    <h3 class="mb-3">{{ selectedPlan?.price | currency : (selectedPlan?.currency ||
-                                        'XAF') }}</h3>
+                                    <div class="mb-3">
+                                        @if (hasDiscount) {
+                                        <div class="mb-1">
+                                            <span class="text-decoration-line-through text-muted h5">{{
+                                                selectedPlan?.price | currency : (selectedPlan?.currency || 'XAF')
+                                                }}</span>
+                                        </div>
+                                        }
+                                        <h3 class="mb-0">{{ finalPrice | currency : (selectedPlan?.currency || 'XAF') }}
+                                        </h3>
+                                        @if (globalDiscount() !== null && appliedDiscount() === null) {
+                                        <div class="mt-1">
+                                            <small class="text-success">
+                                                <i class="bi bi-tag me-1"></i>
+                                                Promotion: -{{ globalDiscount()!.value }}{{ globalDiscount()!.type ===
+                                                'percentage' ? '%' : ' FCFA' }}
+                                            </small>
+                                        </div>
+                                        }
+                                    </div>
                                     <p class="text-muted mb-3">{{ selectedPlan?.description }}</p>
                                     <ul class="list-unstyled mb-0">
                                         @for (benefit of selectedPlan?.benefits || []; track $index) {
@@ -132,7 +191,8 @@
                     <div class="card">
                         <div class="card-body p-5">
                             <h4 class="mb-4">Votre clé de licence</h4>
-                            <div class="align-items-center bg-light d-flex gap-2 mb-4 p-3 rounded">
+                            <div
+                                class="justify-content-between align-items-center bg-light d-flex gap-2 mb-4 p-3 rounded">
                                 <code class="fs-5">{{ licenseKey }}</code>
                                 <button class="btn btn-outline-dark btn-sm ms-3" (click)="downloadLicenseKey()">
                                     <i class="bi bi-download"></i>

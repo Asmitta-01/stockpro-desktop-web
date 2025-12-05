@@ -56,7 +56,7 @@
                 </div>
                 @for (plan of plans; track plan.id) {
                 <div class="col-xl-4 col-lg-4 col-md-6 col-12">
-                    <app-single-pricing-plan [plan]="plan"></app-single-pricing-plan>
+                    <app-single-pricing-plan [plan]="plan" [discount]="globalDiscount()"></app-single-pricing-plan>
                 </div>
                 }
             </div>

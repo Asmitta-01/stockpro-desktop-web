@@ -26,10 +26,20 @@
             }
         </ul>
         <div class="d-grid mt-6">
+            @if (discount == null) {
             <a routerLink="/download" [queryParams]="{ 'license' : plan.name | lowercase}" class="btn btn-primary"
                 target="_top">
                 {{ plan.price| currency : getCurrentCurrency() }}
             </a>
+            }@else {
+            <a routerLink="/download" [queryParams]="{ 'license' : plan.name | lowercase}" class="btn btn-primary"
+                target="_top">
+                <span class="text-decoration-line-through opacity-75 me-2">
+                    {{ plan.price| currency : getCurrentCurrency() }}
+                </span>
+                {{ finalPrice| currency : getCurrentCurrency() }}
+            </a>
+            }
         </div>
     </div>
 </div>

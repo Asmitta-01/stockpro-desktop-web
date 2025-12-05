@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { PaymentData, UserInfo } from '../models/user-info.interface';
+import { Discount, DiscountValidation } from '../models/discount.interface';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
@@ -27,6 +28,7 @@ export class SupabaseService {
       currency: paymentData.currency || 'XAF',
       status: paymentData.status,
       provider: paymentData.provider || null,
+      discount_id: paymentData.discountId || null,
       provider_reference: paymentData.providerReference || null,
       license_key: paymentData.licenseKey || null,
       metadata: paymentData.metadata || null,
@@ -80,6 +82,7 @@ export class SupabaseService {
       planName: row.plan_name || undefined,
       currency: row.currency || undefined,
       provider: row.provider || undefined,
+      discountId: row.discount_id || undefined,
       providerReference: row.provider_reference || undefined,
       metadata: row.metadata || undefined,
       receiptUrl: row.receipt_url || undefined,
@@ -97,5 +100,65 @@ export class SupabaseService {
 
     if (error) throw error;
     return data.license;
+  }
+
+  async validateDiscount(code: string): Promise<DiscountValidation> {
+    const timestamp = new Date().toISOString();
+    const { data, error } = await this.supabase
+      .from('discounts')
+      .select('*')
+      .eq('code', code)
+      .eq('is_active', true)
+      .lte('start_date', timestamp)
+      .gte('end_date', timestamp)
+      .single();
+
+    if (error || !data) {
+      console.log(error);
+      return { isValid: false, message: 'Code de réduction invalide' };
+    }
+
+    if (data.usage_limit && data.used_count >= data.usage_limit) {
+      return { isValid: false, message: 'Code de réduction expiré' };
+    }
+
+    return { isValid: true, discount: this.mapDiscountFromDb(data), message: 'Code valide' };
+  }
+
+  async getGlobalDiscount(): Promise<Discount | null> {
+    const { data, error } = await this.supabase
+      .from('discounts')
+      .select('*')
+      .eq('is_active', true)
+      .eq('is_global', true)
+      .lte('start_date', new Date().toISOString())
+      .gte('end_date', new Date().toISOString())
+      .single();
+
+    if (error) return null;
+    return this.mapDiscountFromDb(data);
+  }
+
+  async incrementDiscountUsage(discountCode: string): Promise<void> {
+    const { error } = await this.supabase.rpc('increment_discount_usage', { discount_code: discountCode });
+    if (error) {
+      console.error('Error incrementing discount usage:', error);
+    }
+  }
+
+  private mapDiscountFromDb(row: any): Discount {
+    return {
+      id: row.id,
+      code: row.code,
+      type: row.type,
+      value: row.value,
+      isActive: row.is_active,
+      isGlobal: row.is_global,
+      startDate: new Date(row.start_date),
+      endDate: new Date(row.end_date),
+      usageLimit: row.usage_limit,
+      usedCount: row.used_count,
+      createdAt: new Date(row.created_at)
+    };
   }
 }
